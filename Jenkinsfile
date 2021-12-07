@@ -1,16 +1,18 @@
 pipeline {
 	agent any
-
+	tools {
+		maven 'M3'
+	}
 	stages {
-		def mvnHome
-		stage('Preparation') {
-			mvnHome = tool 'M3'
-		}
 		stage('Build') {
-			if (isUnix()) {
-				sh "'${mvnHome}/bin/mvn' -DpackageType=${params.packageType} clean package spring-boot:repackage"
-			} else {
-				bat(/"${mvnHome}\bin\mvn" -DpackageType=${params.packageType} clean package spring-boot:repackage/)
+			steps {
+				script {
+					if (isUnix()) {
+						sh "'${M2_HOME}/bin/mvn' -DpackageType=${params.packageType} clean package spring-boot:repackage"
+					} else {
+						bat(/"${M2_HOME}\bin\mvn" -DpackageType=${params.packageType} clean package spring-boot:repackage/)
+					}
+				}
 			}
 		}
 	}
