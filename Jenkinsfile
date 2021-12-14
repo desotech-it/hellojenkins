@@ -17,8 +17,8 @@ pipeline {
         }
   }
   post {
-  success {
-    minioUpload(sourceFiles: "**/target/*.jar", bucketName: "desobucket")
+    success {
+      minioUpload(sourceFiles: "**/target/*.jar", bucketName: "desobucket")
+    } 
   }
-  
 }
