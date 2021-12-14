@@ -10,4 +10,14 @@ pipeline {
 			}
 		}
 	}
+  	post {
+        	always {
+            		archiveArtifacts artifacts: 'target/hellojenkins-1.0.0.jar', fingerprint: true
+		} 
+        	success {
+      			step([$class: 'MinioUploader',
+                    		sourceFile: '**/target/*.jar',
+                    		bucketName: 'desobucket']) 	
+        	}
+  	}
 }
