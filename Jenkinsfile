@@ -12,10 +12,10 @@ pipeline {
 	}
   	post {
         	always {
-            	archiveArtifacts artifacts: 'target/hellojenkins-1.0.0.jar', fingerprint: true
+            		archiveArtifacts artifacts: 'target/hellojenkins-1.0.0.jar', fingerprint: true
 		} 
             	success {
-      		minioUpload(sourceFiles: "**/target/*.jar", bucketName: "desobucket")	
+      			minioUpload(sourceFiles: "**/target/*.jar", bucketName: "desobucket")	
         	}
   	}
 }
