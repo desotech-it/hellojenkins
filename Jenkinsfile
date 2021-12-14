@@ -10,15 +10,15 @@ pipeline {
 			}
 		}
 	}
-  post {
-        always {
-            archiveArtifacts artifacts: 'target/hellojenkins-1.0.0.jar', fingerprint: true
+  	post {
+        	always {
+            	archiveArtifacts artifacts: 'target/hellojenkins-1.0.0.jar', fingerprint: true
             
-        }
-  }
-  post {
-    success {
-      minioUpload(sourceFiles: "**/target/*.jar", bucketName: "desobucket")
-    } 
-  }
+        	}
+  	}
+  	post {
+    		success {
+      		minioUpload(sourceFiles: "**/target/*.jar", bucketName: "desobucket")
+    		} 
+  	}
 }
